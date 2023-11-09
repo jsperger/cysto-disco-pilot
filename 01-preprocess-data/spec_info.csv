@@ -1,0 +1,50 @@
+Colname,InitialGuessSpec,InitialGuessSpecChr,ColnameUsedForRevision,RevisedSpecChr
+"
+cols(
+  Site ",col_character,c,"cols(
+  Site ",f
+Intervention assigned,col_character,c,Intervention assigned,c
+Intervention actually completed,col_character,c,Intervention actually completed,c
+"),
+  Age ",col_double,d,"),
+  Age ",i
+Time (lidocaine instilled) - use military time,col_time,t,Time (lidocaine instilled) - use military time,t
+Time (cystoscopy started) -use military time,col_time,t,Time (cystoscopy started) -use military time,t
+Time elapsed (h:mm),col_time,t,Time elapsed (h:mm),t
+Blue light used?,col_character,c,Blue light used?,f
+Music?,col_character,c,Music?,f
+"If no music, why?",col_character,c,"If no music, why?",c
+"If music, type?",col_character,c,"If music, type?",c
+Visualization?,col_character,c,Visualization?,f
+"If no visualization, why?",col_character,c,"If no visualization, why?",c
+Family members/friends present in the room?,col_character,c,Family members/friends present in the room?,f
+Hydrostatic pressure applied?,col_character,c,Hydrostatic pressure applied?,f
+Cystoscopy result,col_character,c,Cystoscopy result,c
+Reason for cystoscopy - specific,col_character,c,Reason for cystoscopy - specific,c
+Reason for cystoscopy - general,col_character,c,Reason for cystoscopy - general,c
+Number of prior cystoscopies,col_double,d,Number of prior cystoscopies,i
+Months since last cystoscopy,col_character,c,Months since last cystoscopy,c
+Intravesical therapy in last 3 months?,col_character,c,Intravesical therapy in last 3 months?,f
+Nurse/MA/Staff,col_character,c,Nurse/MA/Staff,f
+Challenges encountered before and during cystoscopy (include specifics regarding intervention),col_character,c,Challenges encountered before and during cystoscopy (include specifics regarding intervention),c
+"),
+  Gender ",col_character,c,"),
+  Gender ",f
+"),
+  Race ",col_character,c,"),
+  Race ",f
+"),
+  Ethnicity ",col_character,c,"),
+  Ethnicity ",f
+PROMIX Anxiety: I felt fearful (1-5),col_double,d,PROMIX Anxiety: I felt fearful (1-5),i
+PROMIS Anxiety: I found it hard to focus on anything other than my anxiety (1-5),col_double,d,PROMIS Anxiety: I found it hard to focus on anything other than my anxiety (1-5),i
+PROMIS Anxiety: My worries overwhelmed me (1-5),col_double,d,PROMIS Anxiety: My worries overwhelmed me (1-5),i
+PROMIS Anxiety: I felt uneasy (1-5),col_double,d,PROMIS Anxiety: I felt uneasy (1-5),i
+PROMIS Pain: Pain at its worst (1-5),col_double,d,PROMIS Pain: Pain at its worst (1-5),i
+PROMIS Pain: Pain on average (1-5),col_double,d,PROMIS Pain: Pain on average (1-5),i
+PROMIS Pain: Current pain (1-5),col_double,d,PROMIS Pain: Current pain (1-5),i
+VAS Score: Pain at its worst (0-10),col_double,d,VAS Score: Pain at its worst (0-10),d
+"If you were to undergo cystoscopy again, would you use the same methods to manage pain or discomfort? (1-4)",col_character,c,"If you were to undergo cystoscopy again, would you use the same methods to manage pain or discomfort? (1-4)",f
+"In an overall, general sense, how satisfied are you with the way in which you received cystoscopy today with regard to pain or discomfort? (1-4)",col_character,c,"In an overall, general sense, how satisfied are you with the way in which you received cystoscopy today with regard to pain or discomfort? (1-4)",f
+To what extent did the way in which cystoscopy was performed meet your needs for managing pain or discomfort? (1-4),col_character,c,To what extent did the way in which cystoscopy was performed meet your needs for managing pain or discomfort? (1-4),f
+"If there was a study that tests ways to reduce pain or discomfort associated with cystoscopy, would you consider hearing more and participating if it did not require additional visits or procedure?",col_character,c,"If there was a study that tests ways to reduce pain or discomfort associated with cystoscopy, would you consider hearing more and participating if it did not require additional visits or procedure?",f
