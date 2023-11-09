@@ -10,4 +10,4 @@ cysto_raw <- readr::read_csv("data/cysto_qi_pilot.csv",
 cysto_cleaned <- CleanInputData(cystodf = cysto_raw)
 
 # Write to file
-readr::write_csv(cysto_cleaned, "data/cysto_qi_pilot_renamed.csv")
+readr::write_csv(cysto_cleaned, "./data/cleaned_cysto_qi_pilot.csv")

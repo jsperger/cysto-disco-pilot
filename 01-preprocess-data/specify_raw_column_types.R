@@ -118,4 +118,4 @@ revised_spec <- extract_spec(revised_spec_string) %>%
 
 spec_info <- cbind(spec_df, revised_spec)
 
-write_csv(spec_info, "01-preprocess-data/spec_info.csv")
+write_csv(spec_info, "spec_info.csv")
