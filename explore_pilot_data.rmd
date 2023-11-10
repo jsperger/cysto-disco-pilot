@@ -1,0 +1,35 @@
+---
+title: "Cysto Disco"
+mainfont: Arial
+output:
+    pdf_document:
+    latex_engine: lualatex
+---
+
+```{r libs_and_data, include=FALSE}
+# Libraries
+library(tidyverse)
+
+# Clean Data
+source("01-preprocess-data/create-analysis-dataset.R")
+
+# Functions for Visualizing Data
+source("02-eda/visualize-pilot-data.R")
+
+```
+
+# Exploratory Data Analysis
+
+```{r, echo = FALSE}
+dwell_plots <- CreateDwellTimePlots(cysto = cysto_cleaned)
+
+dwell_plots$Condition
+
+(dwell_plots$ConditionAndGender)
+
+(dwell_plots$VAS)
+
+(dwell_plots$VASAndGender)
+
+(dwell_plots$VASAndGenderNoOutliers)
+```

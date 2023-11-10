@@ -19,10 +19,10 @@ CleanInputData <- function(cystodf){
 .RenameVariables <- function(cystodf){
   data_renamed <- cystodf %>%
     dplyr::rename(
-      StudySite = `Site`,
+      Site = `Site`,
       AssignedIntervention = `Intervention assigned`,
       CompletedIntervention = `Intervention actually completed`,
-      PatientAge = `Age`,
+      Age = `Age`,
       TimeLidocaineInstilled = `Time (lidocaine instilled) - use military time`,
       TimeCystoscopyStarted = `Time (cystoscopy started) -use military time`,
       ElapsedTimeCystoscopy = `Time elapsed (h:mm)`,
@@ -42,9 +42,9 @@ CleanInputData <- function(cystodf){
       IntravesicalTherapyRecent = `Intravesical therapy in last 3 months?`,
       MedicalStaffPresent = `Nurse/MA/Staff`,
       CystoChallenges = `Challenges encountered before and during cystoscopy (include specifics regarding intervention)`,
-      PatientGender = `Gender`,
-      PatientRace = `Race`,
-      PatientEthnicity = `Ethnicity`,
+      Gender = `Gender`,
+      Race = `Race`,
+      Ethnicity = `Ethnicity`,
       AnxietyFearfulScore = `PROMIX Anxiety: I felt fearful (1-5)`,
       AnxietyFocusScore = `PROMIS Anxiety: I found it hard to focus on anything other than my anxiety (1-5)`,
       AnxietyOverwhelmScore = `PROMIS Anxiety: My worries overwhelmed me (1-5)`,
