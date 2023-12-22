@@ -33,3 +33,20 @@ dwell_plots$Condition
 
 (dwell_plots$VASAndGenderNoOutliers)
 ```
+## Site Variation
+
+```{r site_eda, echo = FALSE}
+numeric_vars_to_summarize_by_site <- c("Age",
+                               "LidoDwellMinutes",
+                               "CystoCountPrior",
+                               "MonthsSinceCysto",
+                               "VASWorstPainScore",
+                               "AnxietySumScore",
+                               "PainSumScore")
+
+num_sum_by_site <- SummarizeVarsBySite(cysto = cysto_cleaned,
+                                       summary_var_names = numeric_vars_to_summarize_by_site)
+
+cat_vars_to_summarize_by_ste <- c("TrtMusic", "TrtViz", "TrtBlueLight", "TrtBagSqueeze", "FamilyPresent",
+                                   "MedicalStaffPresent", )
+```

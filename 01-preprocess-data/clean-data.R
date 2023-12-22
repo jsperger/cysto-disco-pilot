@@ -77,8 +77,9 @@ CleanInputData <- function(cystodf){
                   TrtBlueLight = .RelabelYesNo(TrtBlueLight),
                   TrtHydro = .RelabelYesNo(TrtHydro),
                   FamilyPresent = .RelabelYesNo(FamilyPresent),
-                  IntravesicalTherapyRecent = .RelabelYesNo(IntravesicalTherapyRecent))
-
+                  IntravesicalTherapyRecent = .RelabelYesNo(IntravesicalTherapyRecent),
+                  MonthsSinceCysto = na_if(MonthsSinceCysto, "N/A")) %>%
+    mutate(MonthsSinceCysto = as.integer(MonthsSinceCysto))
 
   return(cysto_retyped)
 }
