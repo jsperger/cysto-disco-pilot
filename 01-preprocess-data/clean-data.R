@@ -112,11 +112,16 @@ CleanInputData <- function(cystodf){
       LidoAssignedReceivedAgree = AssignedLidoLeq10 == ReceivedLidoLeq10,
       LidoGroup = factor(AssignedLidoLeq10,
                          levels = c("TRUE", "FALSE"),
-                         labels = c("Leq10Mins", "G10Mins"))) %>%
+                         labels = c("Leq10Mins", "G10Mins")),
+      AssignedMusic = AssignedIntervention %in%
+        c("Lidocaine > 10 min + Music", "Lidocaine ≤ 10 min + Music"),
+      AssignedViz = AssignedIntervention %in% c("Lidocaine > 10 min + Vis.", "Lidocaine ≤ 10 min + Vis.")) %>%
     dplyr::mutate(OfficeCondition = case_when(TrtMusic == FALSE & TrtViz == FALSE ~ "No Office Intervention",
                                               TrtMusic == TRUE & TrtViz == FALSE ~ "Music Only",
                                                 TrtMusic == FALSE & TrtViz == TRUE ~ "Visualization Only",
-                                                TrtMusic == TRUE & TrtViz == TRUE ~ "Music + Visualization"))
+                                                TrtMusic == TRUE & TrtViz == TRUE ~ "Music + Visualization"),
+    AsAssignedMusic = AssignedMusic == TrtMusic,
+    AsAssignedViz = AssignedViz == TrtViz)
 
   return(cysto_add_covars)
 }

@@ -1,6 +1,6 @@
 ---
-title: "Cysto Disco"
-mainfont: Arial
+title: "Cystocopy Discomfort Pilot Data Analysis"
+mainfont: Minion3
 output:
     pdf_document:
     latex_engine: lualatex
@@ -13,29 +13,118 @@ library(tidyverse)
 # Clean Data
 source("01-preprocess-data/create-analysis-dataset.R")
 
-# Functions for Visualizing Data
+# Eploratory Data Analysis Scripts
+## #DA - Descriptive Stats
+source("02-eda/explore_site_differences.R")
+## EDA - Data Visualization
 source("02-eda/visualize-pilot-data.R")
-
 ```
 
-# Exploratory Data Analysis
 
-```{r, echo = FALSE}
+# Exploratory Data Analysis
+## Treatment Assignments
+
+```{r trt_assignments, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::kable(table(cysto_cleaned$Site, cysto_cleaned$AssignedViz), caption = "Visualization Assignments by Site")
+
+knitr::kable(table(cysto_cleaned$Site, cysto_cleaned$AssignedMusic), caption = "Music Assignments by Site")
+
 dwell_plots <- CreateDwellTimePlots(cysto = cysto_cleaned)
 
 dwell_plots$Condition
 
 (dwell_plots$ConditionAndGender)
-
-(dwell_plots$VAS)
-
-(dwell_plots$VASAndGender)
-
-(dwell_plots$VASAndGenderNoOutliers)
 ```
-## Site Variation
 
-```{r site_eda, echo = FALSE}
+## VAS Scores
+
+### Lidocaine Dwell Time
+
+#### Overall
+Words to try and not have the plot on the same line
+
+
+```{r, echo = FALSE, , message = FALSE, warning = FALSE}
+(dwell_plots$VAS)
+```
+
+#### VAS Scatterplots for Subgroups
+Words to try and not have the plot on the same line
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+(dwell_plots$VASAndGender)
+```
+\newpage
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+(dwell_plots$VASAndGenderTrimmed)
+```
+\newpage
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+(dwell_plots$VASAndSite)
+```
+\newpage
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+(dwell_plots$VASAndSiteTrimmed)
+```
+\newpage
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+dwell_plots$VASAndSiteReasonTrimmed
+```
+
+## Office Treatment
+
+```{r office_treatment, echo = FALSE, message = FALSE, warning = FALSE}
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "Site",
+                         title = "VAS Worst Pain Score by Site",
+                         factor_display_name = "Site")
+
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "TrtMusic",
+                         title = "VAS Worst Pain Score by Received Music Treatment",
+                         factor_display_name = "Received Music Treatment")
+
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "TrtViz",
+                         title = "VAS Worst Pain Score by Received Visualization Treatment",
+                         factor_display_name = "Received Visualization Treatment")
+
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "TrtViz",
+                         title = "VAS Worst Pain Score by Received Visualization Treatment",
+                         factor_display_name = "Received Visualization Treatment") +
+  facet_wrap(~Site, nrow = 2)
+
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "OfficeCondition",
+                         title = "VAS Worst Pain Score by Office Condition",
+                         factor_display_name = "Office Condition")
+
+CreateVASByFactorBarplot(cysto = cysto_cleaned,
+                         factor_var = "OfficeCondition",
+                         title = "VAS Worst Pain Score by Office Condition",
+                         factor_display_name = "Office Condition") +
+    facet_wrap(~Site, nrow = 2)
+```
+
+```{r age, echo = FALSE, message = FALSE, warning = FALSE}
+ggplot(data = cysto_cleaned, aes (x = Age, color = Site)) +
+  geom_density() +
+  labs(title = "Distribution of Age by Site")
+
+ggplot(data = cysto_cleaned, aes (x = Age, y = VASWorstPainScore, color = Site)) +
+     geom_jitter() +
+     geom_smooth(method = lm, se = FALSE) +
+     stat_smooth(se = FALSE) +
+     labs(title = "Age and VAS Worst Pain Score by Site")
+
+
+
+```
+
+# Descriptive Statistics
+
+```{r site_eda, echo = FALSE, message = FALSE, warning = FALSE}
 numeric_vars_to_summarize_by_site <- c("Age",
                                "LidoDwellMinutes",
                                "CystoCountPrior",
@@ -48,5 +137,37 @@ num_sum_by_site <- SummarizeVarsBySite(cysto = cysto_cleaned,
                                        summary_var_names = numeric_vars_to_summarize_by_site)
 
 cat_vars_to_summarize_by_ste <- c("TrtMusic", "TrtViz", "TrtBlueLight", "TrtBagSqueeze", "FamilyPresent",
-                                   "MedicalStaffPresent", )
+                                   "MedicalStaffPresent")
+```
+
+## No Intervention
+
+```{r no_intervention, echo = FALSE, message = FALSE, warning = FALSE}
+
+cysto_cleaned %>%
+  filter(TrtMusic == FALSE, TrtViz == FALSE) %>%
+  select(Age, Gender, `Dwell Time` = LidoDwellMinutes, VAS = VASWorstPainScore, `Worst Pain` = PainWorstScore, `Avg Pain` = PainAverageScore, `Current Pain` = PainCurrentScore, `Pain Sum Score` = PainSumScore) %>%
+knitr::kable(caption = "Patients with No Office Intervention")
+# Site, NoMusicReason, NoVisualReason,
+```
+
+## Pain Score Six or Above
+
+```{r pain_six_or_above, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::kable(cysto_cleaned %>%
+    group_by(Site) %>%
+        summarise(Geq6Count = sum(VASWorstPainScore >= 6),
+                  NCystos = n(),
+                  Geq6Prop = Geq6Count / NCystos),
+             digits = 3,
+      caption = "VAS Worst Pain Score Six or Above by Site")
+
+knitr::kable(cysto_cleaned %>%
+        group_by(CystoReasonGeneral, Site) %>%
+        summarise(Geq6Count = sum(VASWorstPainScore >= 6),
+                  NCystos = n(),
+                  Geq6Prop = Geq6Count / NCystos),
+             digits = 3,
+      caption = "VAS Worst Pain Score Six or Above by Site and General Reason for Cystoscopy")
+```
 ```
